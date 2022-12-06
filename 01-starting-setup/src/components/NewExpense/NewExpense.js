@@ -1,20 +1,37 @@
-import './NewExpense.css'
-import ExpenseForm from './ExpenseForm'
+import "./NewExpense.css";
+import ExpenseForm from "./ExpenseForm";
+import { useState } from "react";
 
 const NewExpense = (props) => {
-    const saveExpenseDataHandler = (enteredExpenseData) => {
-        const expenseData = {
-            ...enteredExpenseData,
-            //not efective, genereated ID could be same, but works for the demo
-            id: Math.random().toString()
-        }
-        props.onAddExpense(expenseData)
-    }
+  const [isEditin, setIsEditing] = useState(false);
 
+  const saveExpenseDataHandler = (enteredExpenseData) => {
+    const expenseData = {
+      ...enteredExpenseData,
+      //not efective, genereated ID could be same, but works for the demo
+      id: Math.random().toString(),
+    };
+    props.onAddExpense(expenseData);
+  };
+  const startEditHandler = () => {
+    setIsEditing(true);
+  };
 
-    return <div className='new-expense'>
-        <ExpenseForm onSaveExpenseData={saveExpenseDataHandler} />
+  const stopEditingHandler = () => {
+    setIsEditing(false);
+  };
+
+  return (
+    <div className="new-expense">
+      {!isEditin && <button onClick={startEditHandler}>Add New Expense</button>}
+      {isEditin && (
+        <ExpenseForm
+          onSaveExpenseData={saveExpenseDataHandler}
+          onCancel={stopEditingHandler}
+        />
+      )}
     </div>
-}
+  );
+};
 
-export default NewExpense
+export default NewExpense;

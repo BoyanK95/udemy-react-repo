@@ -6,7 +6,7 @@ import classes from "./AddUser.module.css";
 const AddUser = (props) => {
   const [enteredUsername, setEnteredUsername] = useState("");
   const [enteredAge, setEnteredAge] = useState("");
-
+  
   const addUserHandler = (ev) => {
     ev.preventDefault();
     if (enteredUsername.trim().length === 0 || enteredAge.trim().length === 0) {
@@ -15,7 +15,7 @@ const AddUser = (props) => {
     if (Number(enteredAge) < 1) {
         return
     }
-    console.log(enteredUsername, enteredAge);
+    props.onAddUser(enteredUsername, enteredAge)
     setEnteredUsername("");
     setEnteredAge("");
   };

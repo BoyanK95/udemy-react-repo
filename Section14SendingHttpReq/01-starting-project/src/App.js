@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import MoviesList from "./components/MoviesList";
 import "./App.css";
@@ -8,7 +8,12 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  async function fetchMoviesHandler() {
+// if we want to fetch api when the app starts 
+  // useEffect(() => {
+  //   fetchMoviesHandler()
+  // }, [])
+
+  async function fetchMoviesHandler() { 
     setIsLoading(true);
     setError(null);
     try {

@@ -1,45 +1,52 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 
 const SimpleInput = (props) => {
-  const enteredValue = useRef();
   const [enteredName, setEnteredName] = useState("");
-  const [enteredNameIsValid, setEnteredNameIsValid] = useState(true)
+  const [enteredNameTouched, setEnteredNameTouched] = useState(false)
+
+  const enteredNameIsValid = enteredName.trim() !== ''
+  const nameInputIsInvalid = !enteredNameIsValid && enteredNameTouched
 
   function nameInputChangeHandler(ev) {
     setEnteredName(ev.target.value);
   }
 
-  function formSubmitHandler(ev) {
-    ev.preventDefault();
-
-    if (enteredName.trim() == '') {
-      setEnteredNameIsValid(false)
-      return
-    }
-    setEnteredNameIsValid(true)
-
-    console.log(enteredName);
-
-    const enteredCurrentValue = enteredValue.current.value;
-    console.log(enteredCurrentValue);
-
-    setEnteredName("");
+  function nameInputBlurHandler() {
+    setEnteredNameTouched(true)
   }
 
-  const nameInputClass = enteredNameIsValid ? 'form-control' : 'form-control invalid'
+  function formSubmitHandler(ev) {
+    ev.preventDefault();
+    setEnteredNameTouched(true)
+
+    if (!enteredNameIsValid) {
+      return
+    }
+
+    console.log(enteredName);
+    setEnteredName("");
+    setEnteredNameTouched(false)
+  }
+
+  const nameInputClass = nameInputIsInvalid
+    ? "form-control invalid"
+    : "form-control";
+
 
   return (
     <form onSubmit={formSubmitHandler}>
       <div className={nameInputClass}>
         <label htmlFor="name">Your Name</label>
         <input
-          ref={enteredValue}
           type="text"
           id="name"
           onChange={nameInputChangeHandler}
+          onBlur={nameInputBlurHandler}
           value={enteredName}
         />
-        {!enteredNameIsValid && <p className="error-text">Name must not be empty!</p>}
+        {nameInputIsInvalid && (
+          <p className="error-text">Name must not be empty!</p>
+        )}
       </div>
       <div className="form-actions">
         <button>Submit</button>

@@ -2,13 +2,14 @@ import { useState } from "react";
 
 const SimpleInput = (props) => {
   const [enteredName, setEnteredName] = useState("");
-  const [enteredEmail, setEnteredEmail] = useState("");
   const [enteredNameTouched, setEnteredNameTouched] = useState(false)
+  
+  const [enteredEmail, setEnteredEmail] = useState("");
   const [enteredEmailTouched, setEnteredEmailTouched] = useState(false)
 
   const enteredNameIsValid = enteredName.trim() !== ''
 
-  const regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+  const regex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
   const enteredEmailIsValid = enteredEmail.trim().match(regex) ? true : false
   const emailInputIsInvalid = !enteredEmailIsValid && enteredEmailTouched
   const nameInputIsInvalid = !enteredNameIsValid && enteredNameTouched

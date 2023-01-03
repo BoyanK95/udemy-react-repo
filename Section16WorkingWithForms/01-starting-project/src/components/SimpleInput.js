@@ -1,4 +1,5 @@
 import useInput from "../hooks/use-input";
+import { validateEmail } from "../hooks/validateEmail";
 
 const SimpleInput = (props) => {
   const {
@@ -18,11 +19,6 @@ const SimpleInput = (props) => {
     inputBlurHandler: emailBlurHandler,
     reset: resetEmailInput
   } = useInput(validateEmail)
-
-  function validateEmail(value) {
-    const regex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
-    return value.trim().match(regex)
-  }
   
   let formIsValid = false;
 

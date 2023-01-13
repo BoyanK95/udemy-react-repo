@@ -24,4 +24,29 @@ export const DUMMY_QUOTES = [
     author: "Confucius",
     text: "It does not matter how slowly you go as long as you do not stop.",
   },
+  {
+    id: 6,
+    author: "Nelson Mandela",
+    text: "Education is the most powerful weapon which you can use to change the world.",
+    },
+    {
+    id: 7,
+    author: "Stephen Hawking",
+    text: "The greatest enemy of knowledge is not ignorance, it is the illusion of knowledge.",
+    },
+    {
+    id: 8,
+    author: "Buddha",
+    text: "The mind is everything; what you think you become.",
+    },
+    {
+    id: 9,
+    author: "Eleanor Roosevelt",
+    text: "No one can make you feel inferior without your consent.",
+    },
+    {
+    id: 10,
+    author: "Tony Robbins",
+    text: "The past does not equal the future.",
+    }
 ];

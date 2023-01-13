@@ -8,9 +8,6 @@ import HighlightedQuote from "../components/quotes/HighlightedQuote";
 const QuotesDetails = () => {
   const param = useParams();
   const quote = DUMMY_QUOTES.find(quote => quote.id.toString() === param.quoteId)
-  console.log(quote);
-  console.log(param);
-  console.log(DUMMY_QUOTES);
 
   if (!quote) {
     return <p>No quote found!</p>

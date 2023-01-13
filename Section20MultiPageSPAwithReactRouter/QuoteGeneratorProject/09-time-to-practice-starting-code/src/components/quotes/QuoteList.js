@@ -2,6 +2,7 @@ import { Fragment } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import QuoteItem from "./QuoteItem";
 import classes from "./QuoteList.module.css";
+import { sortQuotes } from "./sortQuotesAlgorithm";
 
 const QuoteList = (props) => {
   const history = useHistory();
@@ -9,6 +10,8 @@ const QuoteList = (props) => {
 
   const queryParam = new URLSearchParams(location.search);
   const isSortingAscending = queryParam.get("sort") === "asc";
+
+  const sortedQuotes = sortQuotes(props.quotes, isSortingAscending)
 
   const changeSortingHandler = () => {
     history.push("/quotes?sort=" + (isSortingAscending ? 'desc' : 'asc'));
@@ -22,7 +25,7 @@ const QuoteList = (props) => {
         </button>
       </div>
       <ul className={classes.list}>
-        {props.quotes.map((quote) => (
+        {sortedQuotes.map((quote) => (
           <QuoteItem
             key={quote.id}
             id={quote.id}

@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import QuoteList from "../components/quotes/QuoteList";
-import { DUMMY_QUOTES } from "./dummy-quotes-arr";
 import useHttp from "../hooks/use-http";
 import { getAllQuotes } from "../lib/api";
 import LoadingSpinner from "../components/UI/LoadingSpinner";

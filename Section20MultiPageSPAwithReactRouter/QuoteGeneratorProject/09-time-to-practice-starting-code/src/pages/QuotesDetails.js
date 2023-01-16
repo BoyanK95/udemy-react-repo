@@ -1,7 +1,6 @@
 import { Fragment, useEffect } from "react";
 import { Link, Route, useParams, useRouteMatch } from "react-router-dom";
 import Comments from "../components/comments/Comments";
-import { DUMMY_QUOTES } from "./dummy-quotes-arr";
 import { getSingleQuote } from "../lib/api";
 import HighlightedQuote from "../components/quotes/HighlightedQuote";
 import useHttp from "../hooks/use-http";
@@ -14,6 +13,7 @@ const QuotesDetails = () => {
     data: LoadedQuote,
     error,
   } = useHttp(getSingleQuote, true);
+  
   const match = useRouteMatch();
   const param = useParams();
 

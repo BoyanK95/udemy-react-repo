@@ -1,5 +1,6 @@
 # udemy-react-repo
 A repo of all my projects following my udemy  "React - The Complete Guide" course.
+
 Included topicks I've worked on in this react repo:
 
 
@@ -36,5 +37,7 @@ Included topicks I've worked on in this react repo:
   -Multiroute SPA with React Router
   
   -Deploying And Optimising React Apps
+  
+  -Adding Authentication to React Apps
   
   

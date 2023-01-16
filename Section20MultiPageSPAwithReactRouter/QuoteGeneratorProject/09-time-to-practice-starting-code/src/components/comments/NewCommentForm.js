@@ -7,7 +7,6 @@ import classes from "./NewCommentForm.module.css";
 
 const NewCommentForm = (props) => {
   const commentTextRef = useRef();
-  const params = useParams()
 
   const { sendRequest, status, error } = useHttp(addComment);
 

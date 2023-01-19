@@ -1,6 +1,6 @@
 import { useRef, useState, useContext } from "react";
 import { API_KEY } from "../../key/ApiKey";
-import { AuthContext } from "../../store/auth-context";
+import AuthContext from "../../store/auth-context";
 import classes from "./AuthForm.module.css";
 
 const AuthForm = () => {

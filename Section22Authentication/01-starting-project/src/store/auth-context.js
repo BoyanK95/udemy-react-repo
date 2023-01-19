@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
-export const AuthContext = React.createContext({
-  token: "",
+const AuthContext = React.createContext({
+  token: '',
   isLoggedIn: false,
   login: (token) => {},
   logout: () => {},
@@ -22,7 +22,7 @@ export const AuthContextProvider = (props) => {
 
   const contextValue = {
     token: token,
-    isLogedIn: userIsLoggedIn,
+    isLoggedIn: userIsLoggedIn,
     login: loginHandler,
     logout: logoutHandler,
   };
@@ -33,3 +33,5 @@ export const AuthContextProvider = (props) => {
     </AuthContext.Provider>
   );
 };
+
+export default AuthContext;

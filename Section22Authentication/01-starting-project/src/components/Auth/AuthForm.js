@@ -5,12 +5,12 @@ import AuthContext from "../../store/auth-context";
 import classes from "./AuthForm.module.css";
 
 const AuthForm = () => {
-  const history = useHistory()
+  const history = useHistory();
 
   const emailInputRef = useRef();
   const passwordInputRef = useRef();
 
-  const authCtx = useContext(AuthContext)
+  const authCtx = useContext(AuthContext);
 
   const [isLogin, setIsLogin] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
@@ -60,8 +60,9 @@ const AuthForm = () => {
         }
       })
       .then((data) => {
-        authCtx.login(data.idToken)
-        history.replace('/')
+        const exparationTime = new Date(new Date().getTime() + (Number(data.expiresIn) * 1000));
+        authCtx.login(data.idToken, exparationTime.toISOString());
+        history.replace("/");
       })
       .catch((err) => {
         alert(err.message);

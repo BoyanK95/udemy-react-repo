@@ -1,5 +1,4 @@
 import { useRef } from 'react';
-
 import Card from '../ui/Card';
 import classes from './NewMeetupForm.module.css';
 
@@ -19,7 +18,7 @@ function NewMeetupForm(props) {
 
     const meetupData = {
       title: enteredTitle,
-      image: enteredImage,
+      img: enteredImage,
       address: enteredAddress,
       description: enteredDescription,
     };

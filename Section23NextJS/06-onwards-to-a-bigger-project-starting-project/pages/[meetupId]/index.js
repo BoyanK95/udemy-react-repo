@@ -1,31 +1,34 @@
+import { MongoClient, ObjectId } from "mongodb";
 import MeetupDetail from "../../components/meetups/MeetupDetail";
 
-function MeetupDetails() {
+function MeetupDetails(props) {
   return (
     <MeetupDetail
-      img="https://thumbs.dreamstime.com/b/colorful-sunset-over-cathedral-assumption-varna-aerial-view-aerial-view-cathedral-assumption-varna-143782588.jpg"
-      title="First Meet up"
-      address="Todor Dimov 33, Varna"
-      description="This is a first meetup"
+      img={props.meetupData.img}
+      title={props.meetupData.title}
+      address={props.meetupData.address}
+      description={props.meetupData.description}
     />
   );
 }
 
-export function getStaticPaths() {
+export async function getStaticPaths() {
+  const client = await MongoClient.connect(
+    "mongodb+srv://Boyan95:12345678910@cluster0.gxnjcll.mongodb.net/meetups?retryWrites=true&w=majority"
+  );
+  const db = client.db();
+
+  const meetupCollection = db.collection("meetups");
+
+  const meetups = await meetupCollection.find({}, { _id: 1 }).toArray();
+
+  client.close()
+
   return {
     fallback: true,
-    paths: [
-      {
-        params: {
-          meetupId: "meet1",
-        },
-      },
-      {
-        params: {
-          meetupId: "meet2",
-        },
-      },
-    ],
+    paths: meetups.map((meetup) => ({
+      params: { meetupId: meetup._id.toString() },
+    })),
   };
 }
 
@@ -33,14 +36,26 @@ export async function getStaticProps(context) {
   //fetch data for a single meet up
   const meetupId = context.params.meetupId;
 
+  const client = await MongoClient.connect(
+    "mongodb+srv://Boyan95:12345678910@cluster0.gxnjcll.mongodb.net/meetups?retryWrites=true&w=majority"
+  );
+  const db = client.db();
+
+  const meetupCollection = db.collection("meetups");
+
+  const selectedMeetup = await meetupCollection.findOne({_id: ObjectId(meetupId)})
+  console.log(selectedMeetup);
+
+  client.close()
+
   return {
     props: {
       meetupData: {
-        img: "https://thumbs.dreamstime.com/b/colorful-sunset-over-cathedral-assumption-varna-aerial-view-aerial-view-cathedral-assumption-varna-143782588.jpg",
-        id: meetupId,
-        title: "First Meet up",
-        address: "Todor Dimov 33, Varna",
-        description: "This is a first meetup",
+        id: selectedMeetup._id.toString(),
+        title: selectedMeetup.title,
+        address: selectedMeetup.address,
+        img: selectedMeetup.img,
+        description: selectedMeetup.description
       },
     },
   };
